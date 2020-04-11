@@ -1,0 +1,30 @@
+{{#each groceries}}
+<p>{{grocery_item}}</p>
+{{/each}}
+
+<form id="addGrocItm">
+    <textarea name="groceryItm" type="text"></textarea>
+    <label for="groceryItm">
+        <button type="submit">Add to Bastket</button>
+    </label>
+</form>
+
+<script>
+    $("#addGrocItm").on("submit", function (event){
+        event.preventDefault();
+        
+        var newGroItm ={
+            groceryItm: $("#addGrocItm [name=groceryItm]").val().trim()
+        };
+        console.log(newGroItm)
+
+        $.ajax("/api/groceries",{
+            type: "POST",
+            data: newGroItm
+        }).then(function(){
+            console.log("added a new grocery item");
+            location.reload();
+        });
+    });
+
+</script>

@@ -33,7 +33,9 @@ var orm = {
         });
     },
     insertOne: function(tableName, col, values, cb){
-        var queryString = "INSERT INTO "+tableName+" ("+col+") VALUES "+"("+values+");";
+        // var queryString = "INSERT INTO "+tableName+" ("+col+") VALUES "+"('"+values+"');";
+        var queryString = `INSERT INTO ${tableName} (${col}) VALUES ('${values}');`;
+        console.log(queryString)
         connection.query(queryString, values, function(err, result){
             if (err){
                 throw err;
